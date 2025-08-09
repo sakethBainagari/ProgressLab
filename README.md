@@ -1,4 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# ProgressLab – AI Coding Assistant Platform
+
+ProgressLab is an AI-powered coding practice and research platform that helps users solve, track, and analyze coding problems. It features real-time code execution, semantic search, and AI-driven explanations, making it ideal for interview preparation and skill development.
+
+## 🚀 Features
+
+- Add, edit, categorize, and track coding problems by topic and difficulty
+- Real-time code execution for Python, JavaScript, Java, C++, and C (Piston API)
+- Monaco Editor for in-browser code editing
+- AI-powered chat assistant (Gemini/OpenAI) for code review, explanations, and Q&A
+- User authentication and personalized analytics (Firebase)
+- Responsive, modern UI with Tailwind CSS
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js, React, TypeScript, Tailwind CSS, Monaco Editor
+- **Backend/API:** Next.js API routes, Firebase Firestore, Firebase Auth
+- **AI/LLM:** Gemini API, OpenAI (optional)
+- **Code Execution:** Piston API
 
 ## Getting Started
 
@@ -7,7 +26,7 @@ First, run the development server:
 ```bash
 npm run dev
 # or
-yarn dev
+
 # or
 pnpm dev
 # or
@@ -16,21 +35,15 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📈 Learn More
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To learn more about the core technologies:
 
-## Learn More
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [Gemini API](https://ai.google.dev/)
+- [Piston API](https://github.com/engineer-man/piston)
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+ProgressLab © 2025 Saketh Bainagari
