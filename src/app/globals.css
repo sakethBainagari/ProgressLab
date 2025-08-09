@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Fix for dropdown text visibility - ensure all select elements have proper text color */
+select {
+  color: black !important;
+}
+
+select option {
+  color: black !important;
+}
+
+/* Additional fix for any text inputs that might have visibility issues */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  color: black !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important; /* gray-500 for placeholder text */
+}
