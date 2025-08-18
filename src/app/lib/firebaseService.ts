@@ -17,7 +17,7 @@ import { db } from '@/app/lib/firebase';
 import { Problem, Category, NewProblemForm } from '@/app/types';
 
 // Helper function to convert Firestore data
-const convertFirestoreData = (data: any): any => {
+const convertFirestoreData = (data: Record<string, any>): Record<string, any> => {
   const converted = { ...data };
   
   // Convert Timestamp fields to Date objects

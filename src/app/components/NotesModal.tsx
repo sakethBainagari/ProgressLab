@@ -90,7 +90,7 @@ export const NotesModal = ({ isOpen, onClose, problem, onSave, onOpenIDE, fullPa
           const parsedNotes = JSON.parse(problem.notes);
           
           // Handle both old and new data formats
-          const migratedApproaches = parsedNotes.approaches?.map((approach: any) => {
+          const migratedApproaches = parsedNotes.approaches?.map((approach: Record<string, any>) => {
             if (approach.code !== undefined && approach.language !== undefined) {
               // Old format: migrate to new format
               return {
@@ -237,18 +237,18 @@ export const NotesModal = ({ isOpen, onClose, problem, onSave, onOpenIDE, fullPa
   };
 
   // Helper functions to safely access approach data
-  const getCurrentCode = (approach: any) => {
+  const getCurrentCode = (approach: Record<string, any>) => {
     const currentLang = approach.currentLanguage || 'javascript';
     const codes = approach.codes || {};
     return codes[currentLang] || '';
   };
 
-  const getCurrentLanguage = (approach: any) => {
+  const getCurrentLanguage = (approach: Record<string, any>) => {
     return approach.currentLanguage || 'javascript';
   };
 
   // Helper function for comparison mode to get code in selected language
-  const getCodeInLanguage = (approach: any, language: string) => {
+  const getCodeInLanguage = (approach: Record<string, any>, language: string) => {
     const codes = approach.codes || {};
     return codes[language] || '';
   };

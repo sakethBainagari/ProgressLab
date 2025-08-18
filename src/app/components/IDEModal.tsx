@@ -110,7 +110,7 @@ export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = 
     return PROGRAMMING_LANGUAGES.find(l => l.value === lang)?.defaultCode || '';
   };
 
-  const handleEditorDidMount = (editor: any, monaco: any) => {
+  const handleEditorDidMount = (editor: unknown, monaco: unknown) => {
     editorRef.current = editor;
     
     // Configure Monaco Editor options for smooth experience
