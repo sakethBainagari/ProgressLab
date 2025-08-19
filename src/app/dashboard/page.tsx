@@ -342,7 +342,7 @@ function DashboardContent() {
           setSelectedProblem(null);
         }}
         problem={selectedProblem}
-        onSave={(problemId: string, notesData: any) => {
+  onSave={(problemId: string, notesData: unknown) => {
           // Handle saving notes - you can implement this based on your needs
           console.log('Saving notes for problem:', problemId, notesData);
         }}

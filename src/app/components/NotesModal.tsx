@@ -90,12 +90,12 @@ export const NotesModal = ({ isOpen, onClose, problem, onSave, onOpenIDE, fullPa
           const parsedNotes = JSON.parse(problem.notes);
           
           // Handle both old and new data formats
-          const migratedApproaches = parsedNotes.approaches?.map((approach: Record<string, any>) => {
+          const migratedApproaches = parsedNotes.approaches?.map((approach: Record<string, unknown>) => {
             if (approach.code !== undefined && approach.language !== undefined) {
               // Old format: migrate to new format
               return {
                 ...approach,
-                codes: { [approach.language]: approach.code },
+                codes: { [(approach.language as string)]: approach.code as string },
                 currentLanguage: approach.language,
                 code: undefined, // Remove old property
                 language: undefined // Remove old property
@@ -237,18 +237,25 @@ export const NotesModal = ({ isOpen, onClose, problem, onSave, onOpenIDE, fullPa
   };
 
   // Helper functions to safely access approach data
-  const getCurrentCode = (approach: Record<string, any>) => {
+  const getCurrentCode = (approach: {
+    codes?: Record<string, string>;
+    currentLanguage?: string;
+  }) => {
     const currentLang = approach.currentLanguage || 'javascript';
     const codes = approach.codes || {};
     return codes[currentLang] || '';
   };
 
-  const getCurrentLanguage = (approach: Record<string, any>) => {
+  const getCurrentLanguage = (approach: {
+    currentLanguage?: string;
+  }) => {
     return approach.currentLanguage || 'javascript';
   };
 
   // Helper function for comparison mode to get code in selected language
-  const getCodeInLanguage = (approach: Record<string, any>, language: string) => {
+  const getCodeInLanguage = (approach: {
+    codes?: Record<string, string>;
+  }, language: string) => {
     const codes = approach.codes || {};
     return codes[language] || '';
   };

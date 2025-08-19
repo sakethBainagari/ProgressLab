@@ -25,56 +25,49 @@ interface IDEModalProps {
   problem: Problem | null;
   onSaveCode?: (problemId: string, code: string, language: string) => void;
   fullPageMode?: boolean;
-}
+// Removed extra closing brace
 
 const PROGRAMMING_LANGUAGES = [
-  { 
-    value: 'javascript', 
-    label: 'JavaScript', 
+  {
+    value: 'javascript',
+    label: 'JavaScript',
     monacoLang: 'javascript',
-    icon: 'JS',
     defaultCode: 'console.log("Hello, World!");',
-    judgeId: 63 
+    judgeId: 63
   },
-  { 
-    value: 'python', 
-    label: 'Python', 
+  {
+    value: 'python',
+    label: 'Python',
     monacoLang: 'python',
     icon: 'PY',
-    defaultCode: 'print("Hello, World!")', 
-    judgeId: 71 
+    defaultCode: 'print("Hello, World!")',
+    judgeId: 71
   },
-  { 
-    value: 'java', 
-    label: 'Java', 
+  {
+    value: 'java',
+    label: 'Java',
     monacoLang: 'java',
-    icon: 'JAVA',
-    defaultCode: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}', 
-    judgeId: 62 
+    defaultCode: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}',
+    judgeId: 62
   },
-  { 
-    value: 'cpp', 
-    label: 'C++', 
+  {
+    value: 'cpp',
+    label: 'C++',
     monacoLang: 'cpp',
-    icon: 'C++',
-    defaultCode: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello, World!" << endl;\n    return 0;\n}', 
-    judgeId: 54 
+    defaultCode: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello, World!" << endl;\n    return 0;\n}',
+    judgeId: 54
   },
-  { 
-    value: 'c', 
-    label: 'C', 
+  {
+    value: 'c',
+    label: 'C',
     monacoLang: 'c',
-    icon: 'C',
-    defaultCode: '#include <stdio.h>\n\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}', 
-    judgeId: 50 
+    defaultCode: '#include <stdio.h>\n\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}',
+    judgeId: 50
   }
 ];
 
 // Available themes for the editor
-const THEMES = [
-  { value: 'vs-dark', label: 'Dark', icon: '🌙' },
-  { value: 'light', label: 'Light', icon: '☀️' }
-];
+// ...existing code...
 
 export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = false }: IDEModalProps) => {
   const [code, setCode] = useState('');
@@ -83,8 +76,7 @@ export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = 
   const [input, setInput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isWaitingForInput, setIsWaitingForInput] = useState(false);
-  const [consoleHistory, setConsoleHistory] = useState<string[]>([]);
-  const [inputQueue, setInputQueue] = useState<string[]>([]);
+// ...existing code...
   const [useRealExecution, setUseRealExecution] = useState(true);
   const [theme, setTheme] = useState('vs-dark');
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -111,10 +103,13 @@ export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = 
   };
 
   const handleEditorDidMount = (editor: unknown, monaco: unknown) => {
-    editorRef.current = editor;
+    if (editorRef && editorRef.current !== undefined) {
+      editorRef.current = editor as any;
+    }
     
     // Configure Monaco Editor options for smooth experience
-    editor.updateOptions({
+    if (editor && typeof (editor as any).updateOptions === 'function') {
+      (editor as any).updateOptions({
       fontSize: fontSize,
       fontFamily: 'JetBrains Mono, Fira Code, Monaco, Consolas, monospace',
       fontLigatures: true,
@@ -146,13 +141,14 @@ export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = 
     });
 
     // Add custom keybindings
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
-      handleRun();
-    });
-
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-      handleSave();
-    });
+    if (editor && monaco && typeof (editor as any).addCommand === 'function') {
+      (editor as any).addCommand((monaco as any).KeyMod.CtrlCmd | (monaco as any).KeyCode.Enter, () => {
+        handleRun();
+      });
+      (editor as any).addCommand((monaco as any).KeyMod.CtrlCmd | (monaco as any).KeyCode.KeyS, () => {
+        handleSave();
+      });
+    }
   };
 
   const copyToClipboard = async () => {
@@ -186,9 +182,9 @@ export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = 
   const handleRun = async () => {
     setIsRunning(true);
     setOutput('');
-    setConsoleHistory([]);
+// ...existing code...
     setIsWaitingForInput(false);
-    setInputQueue([]);
+  // Removed setInputQueue reference
     
     try {
       // Check if code requires input
@@ -257,8 +253,8 @@ export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = 
     setCode(getDefaultCode(language));
     setOutput('');
     setInput('');
-    setConsoleHistory([]);
-    setInputQueue([]);
+// ...existing code...
+  // Removed setInputQueue reference
     setIsWaitingForInput(false);
   };
 
@@ -703,4 +699,4 @@ export const IDEModal = ({ isOpen, onClose, problem, onSaveCode, fullPageMode = 
       </div>
     </div>
   );
-};
+}

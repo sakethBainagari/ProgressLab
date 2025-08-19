@@ -17,15 +17,15 @@ import { db } from '@/app/lib/firebase';
 import { Problem, Category, NewProblemForm } from '@/app/types';
 
 // Helper function to convert Firestore data
-const convertFirestoreData = (data: Record<string, any>): Record<string, any> => {
+const convertFirestoreData = (data: Record<string, unknown>): Record<string, unknown> => {
   const converted = { ...data };
   
   // Convert Timestamp fields to Date objects
-  if (converted.createdAt && converted.createdAt.toDate) {
-    converted.createdAt = converted.createdAt.toDate();
+  if (converted.createdAt && typeof (converted.createdAt as { toDate?: () => Date }).toDate === 'function') {
+    converted.createdAt = (converted.createdAt as { toDate: () => Date }).toDate();
   }
-  if (converted.updatedAt && converted.updatedAt.toDate) {
-    converted.updatedAt = converted.updatedAt.toDate();
+  if (converted.updatedAt && typeof (converted.updatedAt as { toDate?: () => Date }).toDate === 'function') {
+    converted.updatedAt = (converted.updatedAt as { toDate: () => Date }).toDate();
   }
   
   return converted;

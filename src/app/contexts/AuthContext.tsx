@@ -71,11 +71,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const result = await signInWithEmailAndPassword(auth, email, password);
       setUser(convertFirebaseUser(result.user));
       return { success: true };
-    } catch (error: any) {
+  } catch (error: unknown) {
       console.error('Login error:', error);
       return { 
         success: false, 
-        error: error.message || 'Failed to login'
+  error: typeof error === 'object' && error !== null && 'message' in error ? (error as { message?: string }).message || 'Failed to login' : 'Failed to login'
       };
     } finally {
       setIsLoading(false);
@@ -96,11 +96,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       setUser(convertFirebaseUser(result.user));
       return { success: true };
-    } catch (error: any) {
+  } catch (error: unknown) {
       console.error('Signup error:', error);
       return { 
         success: false, 
-        error: error.message || 'Failed to create account'
+  error: typeof error === 'object' && error !== null && 'message' in error ? (error as { message?: string }).message || 'Failed to create account' : 'Failed to create account'
       };
     } finally {
       setIsLoading(false);
