@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -26,7 +27,6 @@ interface IDEModalProps {
   onSaveCode?: (problemId: string, code: string, language: string) => void;
   fullPageMode?: boolean;
 }
-// ...existing code...
 
 const PROGRAMMING_LANGUAGES = [
   {
