@@ -25,7 +25,8 @@ interface IDEModalProps {
   problem: Problem | null;
   onSaveCode?: (problemId: string, code: string, language: string) => void;
   fullPageMode?: boolean;
-// Removed extra closing brace
+// ...existing code...
+// ...existing code...
 
 const PROGRAMMING_LANGUAGES = [
   {
